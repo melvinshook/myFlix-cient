@@ -27185,7 +27185,7 @@ const MainView = ()=>{
         {
             id: 1,
             title: "Step Brothers",
-            image: "https://www.imdb.com/title/tt0838283/mediaviewer/rm3433645824/?ref_=tt_ov_i",
+            image: "https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/450688_StepBrothers_2008_1400x2100_US.jpg?itok=qfBBSVlL",
             description: "Two aimless middle-aged losers still living at home are forced against their will to become roommates when their parents marry.",
             genre: "Comedy",
             director: "Adam McKay"
@@ -27193,7 +27193,7 @@ const MainView = ()=>{
         {
             id: 2,
             title: "Pulp Ficton",
-            image: "https://www.imdb.com/title/tt0110912/mediaviewer/rm1959546112/?ref_=tt_ov_i",
+            image: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1055_.jpg",
             description: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
             genre: "Drama",
             director: "Quentin Tarantino"
@@ -27201,7 +27201,7 @@ const MainView = ()=>{
         {
             id: 3,
             title: "Fight Club",
-            image: "https://www.imdb.com/title/tt0137523/mediaviewer/rm1412004864/?ref_=tt_ov_i",
+            image: "https://m.media-amazon.com/images/M/MV5BY2MxZmJiY2YtMGYyNy00ZmFmLWE5ODQtZTY3YTZlNTE4OTk0XkEyXkFqcGdeQXVyNjUxNDQwMzA@._V1_FMjpg_UX404_.jpg",
             description: "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.",
             genre: "Drama",
             director: "David Fincher"
@@ -27240,7 +27240,7 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "6E/4bWvlo7vQuKnGhlCz+IvH/DY=");
+_s(MainView, "jAkW6xO7zn1rS57tvviz8T8p948=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
