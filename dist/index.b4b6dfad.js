@@ -28504,7 +28504,7 @@ const LoginView = ({ onLoggedin })=>{
             if (data.user) {
                 localStorage.setItem("user", JSON.stringify(data.user));
                 localStorage.setItem("token", data.token);
-                onLoggedin(date.user, data.token);
+                onLoggedin(data.user, data.token);
             } else alert("No such user");
         }).catch((e)=>{
             alert("Something went wrong");
@@ -28628,7 +28628,7 @@ const SignupView = ()=>{
                         value: userName,
                         onChange: (e)=>setUsername(e.target.value),
                         required: true,
-                        minlength: "6"
+                        minLength: "6"
                     }, void 0, false, {
                         fileName: "src/components/signup-view/signup-view.jsx",
                         lineNumber: 39,
