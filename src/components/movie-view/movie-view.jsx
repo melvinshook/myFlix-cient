@@ -1,42 +1,43 @@
 import "./movie-view.scss";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <div>
-      <div>
-        <img className="w-50" src={movie.imagePath} />
-      </div>
-      <div>
-        <span>Title: </span>
-        <span>{movie.title}</span>
-      </div>
-      <div>
-        <span>Description: </span>
-        <span>{movie.description}</span>
-      </div>
-      <div>
-        <span>Genre: </span>
-        <span>{movie.genre.name}</span>
-      </div>
-      <div>
-        <span>Description:</span>
-        <span>{movie.genre.description}</span>
-      </div>
-      <div>
-        <span>Director: </span>
-        <span>{movie.director.name}</span>
-      </div>
-      <div>
-        <span>Bio:</span>
-        <span>{movie.director.bio}</span>
-      </div>
-      <button
-        onClick={onBackClick}
-        className="back-button"
-        style={{ cursor: "pointer" }}
-      >
-        Back
-      </button>
-    </div>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col>
+          <Card>
+            <Card.Img src={movie.imagePath} />
+          </Card>
+        </Col>
+
+        <Col>
+          <Card>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description}</Card.Text>
+
+            <Card.Title>Genre:</Card.Title>
+            <Card.Text>{movie.genre.name}</Card.Text>
+            <Card.Text>{movie.genre.description}</Card.Text>
+
+            <Card.Title>Director</Card.Title>
+            <Card.Text>{movie.director.name}</Card.Text>
+            <Card.Text>{movie.director.bio}</Card.Text>
+
+            <Button
+              onClick={onBackClick}
+              className="back-button"
+              style={{ cursor: "pointer" }}
+            >
+              Back
+            </Button>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
