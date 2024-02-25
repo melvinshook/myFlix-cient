@@ -1,8 +1,16 @@
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ProfileView } from "../profile-view/profile-view";
 
 export const MovieCard = ({ movie }) => {
+  /* useEffect(() => {
+    if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+      setIsFavorite(true);
+    }
+  }, [user]); */
+
   return (
     <Card className="h-100">
       <Card.Img variant="top" src={movie.imagePath} />
@@ -23,5 +31,4 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };

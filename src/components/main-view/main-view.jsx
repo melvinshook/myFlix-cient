@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigaton-bar";
+import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -46,6 +47,66 @@ export const MainView = () => {
         setMovies(moviesFromApi);
       });
   }, [token]);
+
+  // Add Favorite Movie
+  const addFav = (id) => {
+    fetch(
+      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          alert("Failed to add");
+        }
+      })
+      .then((user) => {
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+          //setIsFavorite(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
+  // Remove Favorite Movie
+  const removeFav = (id) => {
+    fetch(
+      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          alert("Failed to remove");
+        }
+      })
+      .then((user) => {
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+          //setIsFavorite(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
 
   return (
     <BrowserRouter>
@@ -124,6 +185,32 @@ export const MainView = () => {
                       </Col>
                     ))}
                   </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col>
+                    <Row>
+                      <ProfileView
+                        user={user}
+                        token={token}
+                        setUser={setUser}
+                        movies={movies}
+                        onDelete={() => {
+                          setUser(null);
+                          setToken(null);
+                          localStorage.clear();
+                        }}
+                      />
+                    </Row>
+                  </Col>
                 )}
               </>
             }
