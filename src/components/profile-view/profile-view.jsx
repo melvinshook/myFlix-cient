@@ -11,14 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({
-  user,
-  movies,
-  setUser,
-  token,
-  removeFav,
-  addFav,
-}) => {
+export const ProfileView = ({ user, movies, setUser, token }) => {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -196,8 +189,6 @@ export const ProfileView = ({
               >
                 <MovieCard
                   movie={movie}
-                  removeFav={removeFav}
-                  addFav={addFav}
                   isFavorite={user.favoriteMovies.includes(movie._id)}
                 />
               </Col>

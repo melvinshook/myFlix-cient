@@ -48,65 +48,31 @@ export const MainView = () => {
       });
   }, [token]);
 
-  // Add Favorite Movie
-  const addFav = (id) => {
+  /* const setFavoriteMovie = (movieId) => {
     fetch(
-      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${id}`,
+      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${movieId}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify({ movieId: movieId }), // Assuming movieId is an object
       }
     )
       .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          alert("Failed to add");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
+        return response.json(); // Parse the JSON returned by the server
       })
-      .then((user) => {
-        if (user) {
-          localStorage.setItem("user", JSON.stringify(user));
-          setUser(user);
-          //setIsFavorite(true);
-        }
+      .then((data) => {
+        console.log(data); // Log the parsed JSON data
       })
       .catch((error) => {
-        console.error("Error: ", error);
+        console.error("There was a problem with the fetch operation:", error);
       });
-  };
-
-  // Remove Favorite Movie
-  const removeFav = (id) => {
-    fetch(
-      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          alert("Failed to remove");
-        }
-      })
-      .then((user) => {
-        if (user) {
-          localStorage.setItem("user", JSON.stringify(user));
-          setUser(user);
-          //setIsFavorite(false);
-        }
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-  };
+  }; */
 
   return (
     <BrowserRouter>
@@ -181,7 +147,12 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard
+                          movie={movie}
+                          user={user}
+                          token={token}
+                          setUser={setUser}
+                        />
                       </Col>
                     ))}
                   </>
