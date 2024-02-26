@@ -27607,6 +27607,9 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         children: !isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
                             onClick: addFavoriteMovie,
+                            style: {
+                                cursor: "pointer"
+                            },
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
@@ -27615,10 +27618,13 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
                             onClick: removeFavoriteMovie,
+                            style: {
+                                cursor: "pointer"
+                            },
                             children: "-"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 84,
+                            lineNumber: 88,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {

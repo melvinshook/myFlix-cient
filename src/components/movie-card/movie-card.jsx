@@ -77,11 +77,19 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
         <Card.Body className="favorite-btns">
           {!isFavorite ? (
-            <Button className="fav-btn" onClick={addFavoriteMovie}>
+            <Button
+              className="fav-btn"
+              onClick={addFavoriteMovie}
+              style={{ cursor: "pointer" }}
+            >
               +
             </Button>
           ) : (
-            <Button className="fav-btn" onClick={removeFavoriteMovie}>
+            <Button
+              className="fav-btn"
+              onClick={removeFavoriteMovie}
+              style={{ cursor: "pointer" }}
+            >
               -
             </Button>
           )}
