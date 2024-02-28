@@ -4,12 +4,19 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+
+  const movie = movies.find((movie) => movie._id === movieId);
+  console.log(movieId);
+
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <Col>
+        <Col md="4">
           <Card>
             <Card.Img src={movie.imagePath} />
           </Card>
@@ -18,6 +25,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <Col>
           <Card>
             <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie._id}</Card.Text>
             <Card.Text>{movie.description}</Card.Text>
 
             <Card.Title>Genre:</Card.Title>
@@ -28,13 +36,9 @@ export const MovieView = ({ movie, onBackClick }) => {
             <Card.Text>{movie.director.name}</Card.Text>
             <Card.Text>{movie.director.bio}</Card.Text>
 
-            <Button
-              onClick={onBackClick}
-              className="back-button"
-              style={{ cursor: "pointer" }}
-            >
-              Back
-            </Button>
+            <Link to={`/`}>
+              <Button className="back-button">Back</Button>
+            </Link>
           </Card>
         </Col>
       </Row>
