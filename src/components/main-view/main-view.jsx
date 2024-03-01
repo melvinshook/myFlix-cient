@@ -3,12 +3,14 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { NavigationBar } from "../navigation-bar/navigaton-bar";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { debounce } from "lodash";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +18,9 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [moviesFiltered, setMoviesFiltered] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -45,34 +50,21 @@ export const MainView = () => {
           };
         });
         setMovies(moviesFromApi);
+        setMoviesFiltered(moviesFromApi);
       });
   }, [token]);
 
-  /* const setFavoriteMovie = (movieId) => {
-    fetch(
-      `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${movieId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ movieId: movieId }), // Assuming movieId is an object
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // Parse the JSON returned by the server
-      })
-      .then((data) => {
-        console.log(data); // Log the parsed JSON data
-      })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
-  }; */
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
+  const debouncedSearch = debounce((searchTerm) => {
+    const filteredMovies = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setMoviesFiltered(filteredMovies);
+  }, 300);
 
   return (
     <BrowserRouter>
@@ -80,9 +72,11 @@ export const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
+          setToken(null);
+          localStorage.clear();
         }}
       />
-      <Row className="justify-content-md-center">
+      <Row className=" main-view justify-content-md-center">
         <Routes>
           <Route
             path="/signup"
@@ -91,7 +85,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5}>
+                  <Col className="col-xl-3 col-lg-4 col-md-5 col-sm-6">
                     <SignupView />
                   </Col>
                 )}
@@ -106,7 +100,7 @@ export const MainView = () => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5}>
+                  <Col className="col-xl-3 col-lg-4 col-md-5 col-sm-6">
                     <LoginView
                       onLoggedin={(user, token) => {
                         setUser(user);
@@ -145,7 +139,17 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    <Col md={12}>
+                      <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        placeholder="Search for movies.."
+                        className="searchBar"
+                      />
+                    </Col>
+
+                    {moviesFiltered.map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
                         <MovieCard
                           movie={movie}

@@ -22,6 +22,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
         if (response.ok) {
           return response.json();
         } else {
+          alert("Could not add moive to favorites");
           console.log("Failed to add favorite movie");
           console.log(movie._id);
         }
