@@ -13,12 +13,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { debounce } from "lodash";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [search, setSearch] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [moviesFiltered, setMoviesFiltered] = useState([]);
 

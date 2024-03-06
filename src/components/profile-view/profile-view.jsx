@@ -16,6 +16,7 @@ export const ProfileView = ({ user, movies, setUser, token }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [isFavorite, setIsFavorite] = useState([]);
 
   //creates an array with all the movies
   const favoriteMovies = movies.filter((m) =>
@@ -158,7 +159,7 @@ export const ProfileView = ({ user, movies, setUser, token }) => {
                       onClick={handleUpdate}
                       className="text-white mt-4"
                     >
-                      update profile
+                      Update profile
                     </Button>
                   </Form>
                   <Link to="/login">
@@ -168,7 +169,7 @@ export const ProfileView = ({ user, movies, setUser, token }) => {
                       onClick={deleteAccount}
                       className="text-white mt-3"
                     >
-                      delete your account
+                      Delete your account
                     </Button>
                   </Link>
                 </Card.Body>
@@ -189,7 +190,9 @@ export const ProfileView = ({ user, movies, setUser, token }) => {
               >
                 <MovieCard
                   movie={movie}
-                  isFavorite={user.favoriteMovies.includes(movie._id)}
+                  user={user}
+                  token={token}
+                  setUser={setUser}
                 />
               </Col>
             );

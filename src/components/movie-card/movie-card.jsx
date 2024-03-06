@@ -4,15 +4,22 @@ import { Button, Card, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, token, setUser, user }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(
+    user && user.favoriteMovies.includes(movie._id)
+  );
 
-  /* useEffect(() => {
-    if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+  useEffect(() => {
+    if (
+      user &&
+      user.favoriteMovies &&
+      user.favoriteMovies.includes(movie._id)
+    ) {
       setIsFavorite(true);
     }
-  }, [user]); */
+  }, [user, movie._id]);
 
   // add favorite movie
+
   const addFavoriteMovie = () => {
     fetch(
       `https://movie-api-careerfoundry-b3e87d3aa42c.herokuapp.com/users/${user.userName}/movies/${movie._id}`,
@@ -75,7 +82,6 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
           <Button variant="link">Open</Button>
         </Link>
-
         <Card.Body className="favorite-btns">
           {!isFavorite ? (
             <Button
@@ -83,15 +89,16 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
               onClick={addFavoriteMovie}
               style={{ cursor: "pointer" }}
             >
-              +
+              Add to favorites
             </Button>
           ) : (
             <Button
               className="fav-btn"
+              variant="danger"
               onClick={removeFavoriteMovie}
               style={{ cursor: "pointer" }}
             >
-              -
+              Remove from favorites
             </Button>
           )}
         </Card.Body>
