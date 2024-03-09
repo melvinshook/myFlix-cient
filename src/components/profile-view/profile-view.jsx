@@ -184,10 +184,7 @@ export const ProfileView = ({ user, movies, setUser, token }) => {
           <Form.Label>Favorite Movies:</Form.Label>
           {favoriteMovies.map((movie) => {
             return (
-              <Col
-                key={movie._id}
-                className="mb-4 justify-content-center align-items-center d-flex"
-              >
+              <Col className="mb-4" key={movie._id} md={3}>
                 <MovieCard
                   movie={movie}
                   user={user}

@@ -27542,7 +27542,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
             }
         }).then((user)=>{
             if (user) {
-                alert("Successfully added to favorites");
+                // alert("Successfully added to favorites");
                 localStorage.setItem("user", JSON.stringify(user));
                 setUser(user);
                 setIsFavorite(true);
@@ -27562,7 +27562,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
             else alert("Failed");
         }).then((user)=>{
             if (user) {
-                alert("successfully deleted from favorites");
+                // alert("successfully deleted from favorites");
                 localStorage.setItem("user", JSON.stringify(user));
                 setUser(user);
                 setIsFavorite(false);
@@ -42282,7 +42282,8 @@ const ProfileView = ({ user, movies, setUser, token })=>{
                         }, undefined),
                         favoriteMovies.map((movie)=>{
                             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                                className: "mb-4 justify-content-center align-items-center d-flex",
+                                className: "mb-4",
+                                md: 3,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                                     movie: movie,
                                     user: user,
@@ -42290,7 +42291,7 @@ const ProfileView = ({ user, movies, setUser, token })=>{
                                     setUser: setUser
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 191,
+                                    lineNumber: 188,
                                     columnNumber: 17
                                 }, undefined)
                             }, movie._id, false, {

@@ -36,7 +36,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
       })
       .then((user) => {
         if (user) {
-          alert("Successfully added to favorites");
+          // alert("Successfully added to favorites");
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
           setIsFavorite(true);
@@ -61,7 +61,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
       })
       .then((user) => {
         if (user) {
-          alert("successfully deleted from favorites");
+          // alert("successfully deleted from favorites");
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
           setIsFavorite(false);
